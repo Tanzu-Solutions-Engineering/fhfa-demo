@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FHFA Demo</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="webjars/jquery/2.2.4/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.6/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap.css">
+    <link rel="stylesheet" href="css/app.css">
+
+
+</head>
+<body>
+
+<script>
+
+    google.charts.load('current', {'packages':['geochart','corechart']});
+
+    google.charts.setOnLoadCallback(initializeMaps);
+    var geoChart;
+    var geoOptions;
+
+
+    function initializeMaps() {
+
+        geoOptions = {region:'US',resolution:'provinces'};
+        geoChart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+        data = google.visualization.arrayToDataTable([
+            ['State', 'Popularity']
+        ]);
+        geoChart.draw(data,geoOptions);
+    }
+
+    $(document).ready(function(){
+        $("input[name=geo_type]:radio").click(function (){
+            $.get("/data/region/?type="+$(this).val(), function(data,status){
+                headers = [['State', 'Data']];
+                geoData = headers.concat(data);
+                geoChart.draw(google.visualization.arrayToDataTable(geoData),geoOptions);
+            });
+        });
+    });
+
+</script>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div id="regions_div" class="chart">foo</div>
+        </div>
+        <div class="col-md-2">
+            <div id="regions-panel">
+                <div class="radio">
+                    <input type="radio" name="geo_type" value="income">
+                    Average Income
+                </div>
+                <div class="radio">
+                    <input type="radio" name="geo_type" value="amount">
+                    Average loan value
+                </div>
+                </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

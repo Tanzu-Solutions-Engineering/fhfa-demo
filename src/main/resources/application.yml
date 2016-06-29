@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      naming-strategy: org.hibernate.cfg.DefaultNamingStrategy
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/ml2
+    platform: mysql
+    username: root
+    password:
+
