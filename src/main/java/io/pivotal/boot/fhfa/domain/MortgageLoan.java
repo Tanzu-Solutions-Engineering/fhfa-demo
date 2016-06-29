@@ -1,6 +1,5 @@
 package io.pivotal.boot.fhfa.domain;
 
-import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -8,8 +7,8 @@ import javax.persistence.Id;
  * @author Vinicius Carvalho
  */
 @Entity
-@javax.persistence.Table(name = "ama_pudb_export_123114")
-public class MortageLoan {
+@javax.persistence.Table(name = "AMA_PUDB_EXPORT_123114")
+public class MortgageLoan {
 	
 	@javax.persistence.Column(name = "Year", nullable = true)
 
@@ -1060,7 +1059,7 @@ public class MortageLoan {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		MortageLoan that = (MortageLoan) o;
+		MortgageLoan that = (MortgageLoan) o;
 
 		return loanNumber == that.loanNumber;
 
